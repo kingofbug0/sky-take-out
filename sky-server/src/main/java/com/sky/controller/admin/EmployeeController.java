@@ -101,4 +101,18 @@ public class EmployeeController {
         PageResult pageResult=employeeService.pageQuery(employeePageQueryDTO);
         return Result.success(pageResult);
     }
+
+    /**
+     * 由于status是地址栏传参 所以需要PathVariabele
+     * @param status
+     * @param id
+     * @return
+     */
+    @ApiOperation("功能描述-员工启用与禁用")
+    @PostMapping("/status/{status}")
+    public Result startOrStop(@PathVariable Integer status,Long id)
+    {
+        employeeService.startOrStop(status,id);
+        return Result.success();
+    }
 }
