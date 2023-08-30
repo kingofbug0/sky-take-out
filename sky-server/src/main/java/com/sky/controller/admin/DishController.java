@@ -2,6 +2,8 @@ package com.sky.controller.admin;
 
 import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
+import com.sky.entity.Dish;
+import com.sky.entity.SetmealDish;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.DishService;
@@ -72,11 +74,26 @@ public class DishController
         return Result.success(dishVO);
     }
 
+    /**
+     * 修改菜品
+     * @param dishDTO
+     * @return
+     */
     @PutMapping
     @ApiOperation("功能描述--修改菜品信息")
     public Result update(@RequestBody DishDTO dishDTO)
     {
         dishService.updateWithFlavor(dishDTO);
         return Result.success();
+    }
+    /**
+     * 查询菜品
+     */
+    @ApiOperation("功能描述--查询菜品")
+    @GetMapping("/list")
+    public Result<List<Dish>> list(Long categoryId)
+    {
+        List<Dish> list=dishService.list(categoryId);
+        return Result.success(list);
     }
 }
