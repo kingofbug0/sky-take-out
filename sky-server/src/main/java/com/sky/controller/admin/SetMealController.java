@@ -2,6 +2,7 @@ package com.sky.controller.admin;
 
 import com.sky.dto.SetmealDTO;
 import com.sky.dto.SetmealPageQueryDTO;
+import com.sky.entity.Setmeal;
 import com.sky.entity.SetmealDish;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
@@ -78,5 +79,12 @@ public class SetMealController
     {
         SetmealVO setmealVO=setMealService.getById(id);
         return Result.success(setmealVO);
+    }
+    @ApiOperation("功能描述--套餐的启动与停止")
+    @PostMapping("/status/{status}")
+    public Result StopOrStart(@PathVariable Integer status,Long id)
+    {
+        setMealService.StopOrStart(status,id);
+        return Result.success();
     }
 }

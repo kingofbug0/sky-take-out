@@ -96,4 +96,11 @@ public class DishController
         List<Dish> list=dishService.list(categoryId);
         return Result.success(list);
     }
+    @PostMapping("/status/{status}")
+    @ApiOperation("功能描述--菜品的启售与停售")
+    public Result StopOrStart(@PathVariable Integer status,Long id)
+    {
+        dishService.StopOrStart(status,id);
+        return Result.success();
+    }
 }

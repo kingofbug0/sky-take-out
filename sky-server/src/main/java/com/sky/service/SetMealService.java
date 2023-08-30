@@ -41,4 +41,11 @@ public interface SetMealService
      * @return
      */
     SetmealVO getById(Long id);
+
+    /**
+     * 套餐的暂停与启用
+     * @param status
+     * @param id
+     */
+    void StopOrStart(Integer status, Long id);
 }

@@ -78,6 +78,8 @@ public class SetMealServiceImpl implements SetMealService
     @Transactional
     public void deleteBatch(List<Long> ids)
     {
+        if(ids==null||ids.size()<1)
+            throw new DeletionNotAllowedException(MessageConstant.DELETE_NOT_CHOICE);
         ids.forEach(id->{
             Setmeal setmeal=setmealMapper.getById(id);
             System.out.println("setmeal:"+setmeal+"id:"+id);
@@ -133,5 +135,15 @@ public class SetMealServiceImpl implements SetMealService
         BeanUtils.copyProperties(setmeal,setmealVO);
         setmealVO.setSetmealDishes(dishes);
         return setmealVO;
+    }
+
+    @Override
+    public void StopOrStart(Integer status, Long id)
+    {
+        Setmeal setmeal=Setmeal.builder()
+                .status(status)
+                .id(id)
+                .build();
+        setmealMapper.update(setmeal);
     }
 }

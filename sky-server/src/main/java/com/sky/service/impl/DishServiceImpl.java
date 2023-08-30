@@ -146,10 +146,30 @@ public class DishServiceImpl implements DishService
         }
     }
 
+    /**
+     * 菜品动态查询
+     * @param categoryId
+     * @return
+     */
     @Override
     public List<Dish> list(Long categoryId)
     {
         Dish dish=Dish.builder().categoryId(categoryId).status(StatusConstant.ENABLE).build();
         return dishMapper.list(dish);
+    }
+
+    /**
+     * 菜品停售与启售
+     * @param status
+     * @param id
+     */
+    @Override
+    public void StopOrStart(Integer status, Long id)
+    {
+        Dish dish=Dish.builder()
+                .status(status)
+                .id(id)
+                .build();
+        dishMapper.update(dish);
     }
 }
