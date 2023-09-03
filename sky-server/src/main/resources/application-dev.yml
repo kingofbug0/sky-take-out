@@ -15,3 +15,6 @@ sky:
     access-key-secret: JzvwauFKtNtMdwrAfzTVdQ5VOFbo80
     access-key-id: LTAI5tPhh8sBuMm3EX1fGEvN
     bucket-name: lyh-delivery-boy
+  wechat:
+    appid: wx2018e4afc2b9b1c3
+    secret: d9dff07fbe5ac549cb5298675ed6cd54
