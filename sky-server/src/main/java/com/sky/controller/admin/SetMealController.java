@@ -11,6 +11,7 @@ import com.sky.vo.SetmealVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class SetMealController
      */
     @PostMapping
     @ApiOperation("功能描述--新增套餐")
+    @CacheEvict(cacheNames = "setmealCache",key = "#setmealDTO.categoryId")
     public Result save(@RequestBody SetmealDTO setmealDTO)
     {
         setMealService.saveWithDish(setmealDTO);
@@ -55,6 +57,7 @@ public class SetMealController
      */
     @ApiOperation("功能模块--删除套餐")
     @DeleteMapping
+    @CacheEvict(cacheNames = "setmealCache",allEntries = true)
     public Result delete(@RequestParam List<Long> ids)
     {
         setMealService.deleteBatch(ids);
@@ -68,6 +71,7 @@ public class SetMealController
      */
     @ApiOperation("功能模块--修改套餐")
     @PutMapping
+    @CacheEvict(cacheNames = "setmealCache",allEntries = true)
     public Result update(@RequestBody SetmealDTO setmealDTO)
     {
         setMealService.updateWithDish(setmealDTO);
@@ -82,6 +86,7 @@ public class SetMealController
     }
     @ApiOperation("功能描述--套餐的启动与停止")
     @PostMapping("/status/{status}")
+    @CacheEvict(cacheNames = "setmealCache",allEntries = true)
     public Result StopOrStart(@PathVariable Integer status,Long id)
     {
         setMealService.StopOrStart(status,id);
