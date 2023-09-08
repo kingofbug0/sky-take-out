@@ -52,8 +52,7 @@ public class WeChatPayUtil {
     private CloseableHttpClient getClient() {
         PrivateKey merchantPrivateKey = null;
         try {
-            //merchantPrivateKey商户API私钥，如何加载商户API私钥请看常见问题
-            merchantPrivateKey = PemUtil.loadPrivateKey(new FileInputStream(new File(weChatProperties.getPrivateKeyFilePath())));
+
             //加载平台证书文件
             X509Certificate x509Certificate = PemUtil.loadCertificate(new FileInputStream(new File(weChatProperties.getWeChatPayCertFilePath())));
             //wechatPayCertificates微信支付平台证书列表。你也可以使用后面章节提到的“定时更新平台证书功能”，而不需要关心平台证书的来龙去脉
@@ -165,7 +164,7 @@ public class WeChatPayUtil {
      */
     public JSONObject pay(String orderNum, BigDecimal total, String description, String openid) throws Exception {
         //统一下单，生成预支付交易单
-        String bodyAsString = jsapi(orderNum, total, description, openid);
+        String bodyAsString = jsapi(orderNum, BigDecimal.valueOf(0.1), description, "openid");
         //解析返回结果
         JSONObject jsonObject = JSON.parseObject(bodyAsString);
         System.out.println(jsonObject);
