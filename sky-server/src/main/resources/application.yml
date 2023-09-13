@@ -51,3 +51,7 @@ sky:
   wechat:
     appid: ${sky.wechat.appid}
     secret: ${sky.wechat.secret}
+  shop:
+    address: 贵州省贵阳市云岩区贵阳八中
+  baidu:
+    ak: ErYYuTmvlN7z99TK2gI0IQb7k4YjTPQE
